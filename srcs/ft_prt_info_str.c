@@ -41,10 +41,7 @@ void	print_grp(t_file *file, int a, int tmp)
 	new = (char *)malloc(sizeof(char) * tmp);
 	while (tot > tmp++)
 		new[a++] = ' ';
-	a = 0;
-	while (str[a++])
-		new[tmp++] = str[a];
-	new = ft_strcat(new, str);
+	new = ft_strcat(str, new);
 	ft_putstr(new);
 	ft_putstr("  ");
 }
@@ -71,10 +68,7 @@ void	print_uid(t_file *file, int a, int tmp)
 	new = (char *)malloc(sizeof(char) * tmp);
 	while (tot > tmp++)
 		new[a++] = ' ';
-	a = 0;
-	while (str[a++])
-		new[tmp++] = str[a];
-	new = ft_strcat(new, str);
+	new = ft_strcat(str, new);
 	ft_putstr(new);
 	ft_putstr("  ");
 }
