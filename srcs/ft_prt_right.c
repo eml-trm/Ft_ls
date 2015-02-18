@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_info.c                                          :+:      :+:    :+:   */
+/*   ft_prt_right.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etermeau <etermeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -102,50 +102,51 @@ size_t	cal_total(t_file *file, char *dirname)
 	return (cal);
 }
 
-// void	ft_sort_date(char *str, int res, int next, int oth)
-// {
-// 	int	a;
-// 	int	i;
+void	ft_sort_date(char *str, int res, int next, int oth)
+{
+	int	a;
+	int	i;
 
-// 	i = 8;
-// 	a = 11;
-// 	while (i < a)
-// 		write(1, &str[i++], 1);
-// 	i = 4;
-// 	a = 8;
-// 	while (i < a)
-// 		write(1, &str[i++], 1);
-// 	if (res < 15778463 && next < oth)
-// 	{
-// 		i = 11;
-// 		a = 16;
-// 		while (i < a)
-// 			write(1, &str[i++], 1);
-// 	}
-// 	else
-// 	{
-// 		i = 20;
-// 		a = 25;
-// 		while (i < a)
-// 			write(1, &str[i++], 1);
-// 	}
-// }
+	i = 8;
+	a = 11;
+	while (i < a)
+		write(1, &str[i++], 1);
+	i = 4;
+	a = 8;
+	while (i < a)
+		write(1, &str[i++], 1);
+	if (res < 15778463 && next < oth)
+	{
+		i = 11;
+		a = 16;
+		while (i < a)
+			write(1, &str[i++], 1);
+	}
+	else
+	{
+		i = 20;
+		a = 25;
+		while (i < a)
+			write(1, &str[i++], 1);
+	}
+}
 
-// void	ft_time(struct stat ret, int res, int oth)
-// {
-// 	struct timespec	strc;
-// 	int				next;
-// 	time_t			date;
-// 	char			*temps;
-// 	char			*tps;
+void	ft_time(t_file *file, int res, int oth)
+{
+	struct timespec	strc;
+	int				next;
+	time_t			date;
+	char			*temps;
+	char			*tps;
 
-// 	date = time(&(strc.tv_sec));
-// 	temps = ctime(&(ret.st_mtimespec.tv_sec));
-// 	tps = ft_strchr(temps, '\n');
-// 	*tps = 0;
-// 	res = ((date) - (ret.st_mtimespec.tv_sec));
-// 	oth = date;
-// 	next = (ret.st_mtimespec.tv_sec);
-// 	ft_sort_date(temps, res, next, oth);
-// }
+	date = time(&(strc.tv_sec));
+	temps = ctime(&(file->data->st_mtimespec.tv_sec));
+	tps = ft_strchr(temps, '\n');
+	*tps = 0;
+	res = ((date) - (file->data->st_mtimespec.tv_sec));
+	oth = date;
+	next = (file->data->st_mtimespec.tv_sec);
+	ft_sort_date(temps, res, next, oth);
+	ft_putstr(" ");
+}
 

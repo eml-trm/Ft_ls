@@ -83,11 +83,17 @@ void	ft_print_info(t_file *file)
 	print_grp(file, 0, 0);
 	// if (S_ISCHR(file->data->st_mode) || S_ISBLK(file->data->st_mode))
 	// {
+	// 	printf("ici");
 	// 	print_nbr_dev(file, 0, 0);
-	// 	ft_putnbr(ret.st_rdev);
+	// 	print_nbr_rdev(file, 0, 0);
 	// }
 	// else
+	// {
 		print_nbr_sze(file, 0, 0);
+		// printf("else");
+	//}
+	ft_time(file, 0, 0);
+	ft_putstr(file->content);
 	ft_putchar('\n');
 }
 

@@ -48,6 +48,7 @@ t_file				*init(void);
 int					count(t_dir *dir);
 
 /* opt -l et -t */
+void				print_nbr_rdev(t_file *file, int a, int i);
 void				print_nbr_dev(t_file *file, int a, int i);
 void				print_uid(t_file *file, int a, int tmp);
 void				print_grp(t_file *file, int a, int tmp);
@@ -64,7 +65,7 @@ void				right_oth(struct stat *data);
 void				right_grp(struct stat *data);
 void				right_usr(struct stat *data);
 void				ft_sort_date(char *str, int res, int next, int oth);
-void				ft_time(struct stat ret, int res, int oth);
+void				ft_time(t_file *file, int res, int oth);
 size_t				cal_total(t_file *file, char *fullname);
 void				print_right(struct stat *data);
 

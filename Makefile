@@ -28,8 +28,9 @@ SRC = main.c \
 	  ft_option.c \
 	  ft_list.c \
 	  ft_reverse.c \
-	  ft_info.c \
-	  ft_info2.c \
+	  ft_prt_info_str.c \
+	  ft_prt_info_nbr.c \
+	  ft_prt_right.c \
 	  ft_opt_t.c
 
 OBJ = $(SRC:.c=.o)
