@@ -54,6 +54,7 @@ void	print_nbr_sze(t_file *file, int a, int i)
 	t_file		*oth;
 	int			nbr;
 	char		*new;
+	char		*hlp;
 
 	oth = file;
 	while (oth)
@@ -70,76 +71,70 @@ void	print_nbr_sze(t_file *file, int a, int i)
 	new = (char *)malloc(sizeof(char) * (ft_strlen(ft_itoa(bignb))));
 	while (i-- > (int)ft_strlen(ft_itoa(nbr)))
 		new[a++] = ' ';
-	new = ft_strcat(new, ft_itoa(nbr));
-	if ((int)ft_strlen(ft_itoa(nbr)) >= bignb)
-		ft_putnbr(nbr);
-	else
+	if (S_ISCHR(oth->data->st_mode) || S_ISBLK(oth->data->st_mode))
+	{
+		new = print_nbr_major(oth, 0, 0);
 		ft_putstr(new);
+		hlp = (char *)malloc(sizeof(char) * (oth->data->st_rdev));
+		hlp = print_nbr_minor(oth, 0, 0);
+		ft_putstr(", ");
+		ft_putstr(hlp);
+	}
+	else
+	{
+		new = ft_strcat(new, ft_itoa(nbr));
+		ft_putstr(new);
+	}
 	ft_putstr(" ");
 }
 
 
-void	print_nbr_dev(t_file *file, int a, int i)
+char	*print_nbr_major(t_file *file, int a, int i)
 {
-	// static int	bignb;
-	// t_file		*oth;
-	// int			nbr;
-	// char		*new;
+	static int	bignb;
+	t_file		*oth;
+	int			nbr;
+	char		*new;
 
-	// oth = file;
-	// while (oth)
-	// {
-	// 	nbr = oth->data->st_dev;
-	// 	if (nbr > bignb)
-	// 		bignb = nbr;
-	// 	oth = oth->next;
-	// }
-	// oth = file;
-	// nbr = oth->data->st_dev;
-	// i = ft_strlen(ft_itoa(bignb));
-	// new = (char *)malloc(sizeof(char) * (ft_strlen(ft_itoa(bignb))));
-	// while (i-- > (int)ft_strlen(ft_itoa(nbr)))
-	// 	new[a++] = ' ';
-	// new = ft_strcat(new, ft_itoa(nbr));
-	// if (ft_strlen(ft_itoa(nbr)) > 1)
-	// 	ft_putnbr(nbr);
-	// else
-	// 	ft_putstr(new);
-	a = a;
-	i = i;
-	ft_putnbr(file->data->st_dev);
-	ft_putstr(" ");
+	oth = file;
+	while (oth)
+	{
+		nbr = major(file->data->st_dev);
+		if (nbr > bignb)
+			bignb = nbr;
+		oth = oth->next;
+	}
+	oth = file;
+	nbr = major(file->data->st_rdev);
+	i = ft_strlen(ft_itoa(bignb));
+	new = (char *)malloc(sizeof(char) * (ft_strlen(ft_itoa(bignb))));
+	while (i-- > (int)ft_strlen(ft_itoa(nbr)))
+		new[a++] = ' ';
+	new = ft_strcat(new, ft_itoa(nbr));
+	return (new);
 }
 
-void	print_nbr_rdev(t_file *file, int a, int i)
+char	*print_nbr_minor(t_file *file, int a, int i)
 {
-// 	static int	bignb;
-// 	t_file		*oth;
-// 	int			nbr;
-// 	char		*new;
+	static int	bignb;
+	t_file		*oth;
+	int			nbr;
+	char		*new;
 
-// 	oth = file;
-// 	while (oth)
-// 	{
-// 		nbr = oth->data->st_rdev;
-// 		if (nbr > bignb)
-// 			bignb = nbr;
-// 		oth = oth->next;
-// 	}
-// 	oth = file;
-// 	nbr = oth->data->st_rdev;
-// 	i = ft_strlen(ft_itoa(bignb));
-// 	new = (char *)malloc(sizeof(char) * (ft_strlen(ft_itoa(bignb))));
-// 	while (i-- > (int)ft_strlen(ft_itoa(nbr)))
-// 		new[a++] = ' ';
-// 	new = ft_strcat(new, ft_itoa(nbr));
-// 	if (ft_strlen(ft_itoa(nbr)) > 1)
-// 		ft_putnbr(nbr);
-// 	else
-// 		ft_putstr(new);
-
-	a = a;
-	i = i;
-	ft_putnbr(file->data->st_rdev);
-	ft_putstr(" ");
+	oth = file;
+	while (oth)
+	{
+		nbr = minor(file->data->st_rdev);
+		if (nbr > bignb)
+			bignb = nbr;
+		oth = oth->next;
+	}
+	oth = file;
+	nbr = minor(file->data->st_rdev);
+	i = ft_strlen(ft_itoa(bignb));
+	new = (char *)malloc(sizeof(char) * (ft_strlen(ft_itoa(bignb))));
+	while (i-- > (int)ft_strlen(ft_itoa(nbr)))
+		new[a++] = ' ';
+	new = ft_strcat(new, ft_itoa(nbr));
+	return (new);
 }

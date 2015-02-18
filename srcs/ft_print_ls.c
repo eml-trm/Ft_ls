@@ -41,7 +41,7 @@ void	ft_print_ls(t_dir *tmp, int c, int *tab)
 				}
 				if (tab[2] == 1)
 				{
-					ft_print_info(file);
+					ft_print_info(file, tmp->elem);
 					//ft_ls_l(file);
 
 				}

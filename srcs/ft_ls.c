@@ -75,25 +75,25 @@ void	read_dir(t_dir *param, char *str, int *tab)
 	param->start = file;
 }
 
-void	ft_print_info(t_file *file)
+void	ft_print_info(t_file *file, char *dir)
 {
+	char	*buf;
+
 	print_right(file->data);
 	print_nbr_link(file, 0, 0);
 	print_uid(file, 0, 0);
 	print_grp(file, 0, 0);
-	// if (S_ISCHR(file->data->st_mode) || S_ISBLK(file->data->st_mode))
-	// {
-	// 	printf("ici");
-	// 	print_nbr_dev(file, 0, 0);
-	// 	print_nbr_rdev(file, 0, 0);
-	// }
-	// else
-	// {
-		print_nbr_sze(file, 0, 0);
-		// printf("else");
-	//}
+	print_nbr_sze(file, 0, 0);
 	ft_time(file, 0, 0);
 	ft_putstr(file->content);
+	if (S_ISLNK(file->data->st_mode))
+	{
+		buf = (char *)malloc(sizeof(char) * (ft_strlen(file->content) + 1));
+		ft_putstr(" -> ");
+		readlink(ft_strcjoin(dir, file->content, '/'), buf, (ft_strlen(file->content)));
+		ft_putstr(buf);
+		free(buf);
+	}
 	ft_putchar('\n');
 }
 

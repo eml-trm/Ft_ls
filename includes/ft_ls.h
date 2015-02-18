@@ -48,13 +48,13 @@ t_file				*init(void);
 int					count(t_dir *dir);
 
 /* opt -l et -t */
-void				print_nbr_rdev(t_file *file, int a, int i);
-void				print_nbr_dev(t_file *file, int a, int i);
+char				*print_nbr_minor(t_file *file, int a, int i);
+char				*print_nbr_major(t_file *file, int a, int i);
 void				print_uid(t_file *file, int a, int tmp);
 void				print_grp(t_file *file, int a, int tmp);
 void				print_nbr_sze(t_file *file, int a, int i);
 void				print_nbr_link(t_file *file, int a, int i);
-void				ft_print_info(t_file *file);
+void				ft_print_info(t_file *file, char *dir);
 void				ft_sort_time_dir(t_dir *dir);
 void				ft_sort_time_file(t_file *file);
 void				ft_data(char *fullname, t_file *file);
