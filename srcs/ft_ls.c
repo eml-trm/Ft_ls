@@ -23,20 +23,24 @@
 
 void	ft_ls(t_dir *param, char *str, int *tab)
 {
+	t_file *file;
+
 	if (check_param(str) == 1)
 		read_dir(param, str, tab);
+	else if (check_param(str) == 3)
+		param->printme = 0;
 	else
-		ft_putendl(str);
+		ft_add_list(&file, param->elem, param->elem, tab);
 }
 
-t_file	*init()
+t_file	*init(void)
 {
 	t_file *file;
 
 	if (!(file = (t_file *)malloc(sizeof(t_file))))
-		ft_code_erreur(3);
+		ft_code_erreur(3, NULL);
 	if (!(file->data = (struct stat *)malloc(sizeof(struct stat))))
-		ft_code_erreur(3);
+		ft_code_erreur(3, NULL);
 	file->content = NULL;
 	file->next = NULL;
 	file->prev = NULL;
@@ -54,30 +58,33 @@ void	read_dir(t_dir *param, char *str, int *tab)
 	char			*fullname;
 
 	file = init();
-	dir = NULL;
+
 	if (!(dir = opendir(str)))
-		ft_code_erreur(1);
+	{
+		ft_code_erreur(1, str);
+		return ;
+	}
 	while ((ret = readdir(dir)))
 	{
 		fullname = ft_strcjoin(str, ret->d_name, '/');
+		if (tab[4] == 1)
+		{
+			if (!(ft_strequ(ret->d_name, ".") || ft_strequ(ret->d_name, "..")))
+			ft_recursive(fullname, param);
+		}
 		if ((tab[0] != 1) && (ret->d_name[0] == '.'))
 			continue;
 		ft_add_list(&file, fullname, ret->d_name, tab);
 	}
 	if ((ft_cmp_list(file)) != (-1))
 		ft_change_list(file);
-	param->total = cal_total(file, str);
-	if (tab[3] == 1)
-	{
-		ft_sort_time_file(file);
-		//ft_sort_time_dir(param);
-	}
 	param->start = file;
 }
 
 void	ft_print_info(t_file *file, char *dir)
 {
-	char	*buf;
+	static char	buf[2048];
+	char		*join;
 
 	print_right(file->data);
 	print_nbr_link(file, 0, 0);
@@ -88,17 +95,12 @@ void	ft_print_info(t_file *file, char *dir)
 	ft_putstr(file->content);
 	if (S_ISLNK(file->data->st_mode))
 	{
-		buf = (char *)malloc(sizeof(char) * (ft_strlen(file->content) + 1));
+		join = ft_strcjoin(dir, file->content, '/');
 		ft_putstr(" -> ");
-		readlink(ft_strcjoin(dir, file->content, '/'), buf, (ft_strlen(file->content)));
+		ft_memset(buf, 0, 2048);
+		readlink(join, buf, 2048);
 		ft_putstr(buf);
-		free(buf);
+		free(join);
 	}
 	ft_putchar('\n');
 }
-
-// void				ft_ls_l(t_file *file)
-// {
-// 		prnt(ret, uid, group, file);
-// 		ft_putchar('\n');
-// }
