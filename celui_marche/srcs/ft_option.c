@@ -31,9 +31,9 @@ void	check_opt(int *opt, char *str)
 		if (str[i] == 'R')
 			opt[4] = 1;
 		if (str[i] == '-' && str[i + 1] == '-')
-		{
 			ft_code_erreur(0, NULL);
-		}
+		if (str[i] == '-' && str[i + 2] == '-')
+			ft_code_erreur(0, NULL);
 		i++;
 	}
 }

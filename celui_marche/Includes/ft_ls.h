@@ -64,7 +64,7 @@ void				ft_sort_time_file(t_file *file);
 void				ft_data_dir(char *dirname, t_dir *new);
 void				ft_data(char *fullname, t_file *file);
 void				ft_swap(t_file *file);
-void				ft_swap_dir(t_dir *dir);
+void				ft_swap_dir(t_dir *dir, char printme);
 void				right_oth(struct stat *data);
 void				right_grp(struct stat *data);
 void				right_usr(struct stat *data);

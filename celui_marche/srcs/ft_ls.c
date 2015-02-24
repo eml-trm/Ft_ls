@@ -69,7 +69,7 @@ void	read_dir(t_dir *param, char *str, int *tab)
 		if (tab[4] == 1)
 		{
 			if (!(ft_strequ(ret->d_name, ".") || ft_strequ(ret->d_name, "..")))
-			ft_recursive(fullname, param);
+				ft_recursive(fullname, param);
 		}
 		if ((tab[0] != 1) && (ret->d_name[0] == '.'))
 			continue;
