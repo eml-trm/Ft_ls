@@ -6,20 +6,13 @@
 /*   By: etermeau <etermeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/20 11:25:21 by etermeau          #+#    #+#             */
-/*   Updated: 2015/01/20 11:25:22 by etermeau         ###   ########.fr       */
+/*   Updated: 2015/02/25 16:35:49 by etermeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <time.h>
-#include <grp.h>
-#include <pwd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <uuid/uuid.h>
 #include "ft_ls.h"
 
-void	right_usr(struct stat *data)
+void			right_usr(strucstat *data)
 {
 	ft_putstr((data->st_mode & S_IRUSR) ? "r" : "-");
 	ft_putstr((data->st_mode & S_IWUSR) ? "w" : "-");
@@ -33,7 +26,7 @@ void	right_usr(struct stat *data)
 		ft_putstr("-");
 }
 
-void	right_grp(struct stat *data)
+void			right_grp(strucstat *data)
 {
 	ft_putstr((data->st_mode & S_IRGRP) ? "r" : "-");
 	ft_putstr((data->st_mode & S_IWGRP) ? "w" : "-");
@@ -47,12 +40,12 @@ void	right_grp(struct stat *data)
 		ft_putstr("-");
 }
 
-void	right_oth(struct stat *data)
+void			right_oth(strucstat *data)
 {
 	ft_putstr((data->st_mode & S_IROTH) ? "r" : "-");
 	ft_putstr((data->st_mode & S_IWOTH) ? "w" : "-");
 	if ((data->st_mode & S_ISVTX) && (data->st_mode & S_IXGRP)
-	&& (data->st_mode & S_IXUSR))
+		&& (data->st_mode & S_IXUSR))
 		ft_putstr("t");
 	else if ((data->st_mode & S_ISVTX))
 		ft_putstr("T");
@@ -62,7 +55,7 @@ void	right_oth(struct stat *data)
 		ft_putstr("-");
 }
 
-void	print_right(struct stat *data)
+void			print_right(strucstat *data)
 {
 	if (S_ISDIR(data->st_mode))
 		ft_putstr("d");
@@ -84,9 +77,9 @@ void	print_right(struct stat *data)
 	ft_putstr("  ");
 }
 
-size_t	cal_total(t_file *file, char *dirname)
+size_t			cal_total(t_file *file, char *dirname)
 {
-	struct stat ret;
+	struct stat	ret;
 	size_t		cal;
 	char		*fullname;
 

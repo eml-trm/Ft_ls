@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 #include "ft_ls.h"
 
@@ -56,7 +55,7 @@ int		main(int ac, char **av)
 	t_dir	*dir;
 	int		c;
 
-	(void)ac;
+	ac = ac;
 	init_zero(tab);
 	dir = NULL;
 	i = 0;

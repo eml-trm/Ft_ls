@@ -10,12 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <time.h>
-#include <grp.h>
-#include <pwd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <uuid/uuid.h>
 #include "ft_ls.h"
 
 void	print_nbr_link(t_file *file, int a, int i)
@@ -36,7 +30,7 @@ void	print_nbr_link(t_file *file, int a, int i)
 	oth = file;
 	nbr = oth->data->st_nlink;
 	i = ft_strlen(ft_itoa(bignb));
-	new = (char *)malloc(sizeof(char) * (ft_strlen(ft_itoa(bignb))));
+	new = (char *)malloc(sizeof(char) * i + 1);
 	while (i-- > (int)ft_strlen(ft_itoa(nbr)))
 		new[a++] = ' ';
 	new = ft_strcat(new, ft_itoa(nbr));
@@ -47,13 +41,11 @@ void	print_nbr_link(t_file *file, int a, int i)
 	ft_putstr(" ");
 }
 
-void	print_nbr_sze(t_file *file, int a, int i)
+void	print_nbr_sze(t_file *file, int a, int i, int nbr)
 {
 	static int	bignb;
 	t_file		*oth;
-	int			nbr;
 	char		*new;
-	char		*hlp;
 
 	oth = file;
 	while (oth)
@@ -70,20 +62,22 @@ void	print_nbr_sze(t_file *file, int a, int i)
 	while (i-- > (int)ft_strlen(ft_itoa(nbr)))
 		new[a++] = ' ';
 	if (S_ISCHR(oth->data->st_mode) || S_ISBLK(oth->data->st_mode))
-	{
-		new = print_nbr_major(oth, 0, 0);
-		ft_putstr(new);
-		hlp = (char *)malloc(sizeof(char) * (oth->data->st_rdev));
-		hlp = print_nbr_minor(oth, 0, 0);
-		ft_putstr(", ");
-		ft_putstr(hlp);
-	}
+		maj_min(oth, new);
 	else
-	{
-		new = ft_strcat(new, ft_itoa(nbr));
-		ft_putstr(new);
-	}
+		ft_putstr(ft_strcat(new, ft_itoa(nbr)));
 	ft_putstr(" ");
+}
+
+void	maj_min(t_file *oth, char *new)
+{
+	char		*hlp;
+
+	new = print_nbr_major(oth, 0, 0);
+	ft_putstr(new);
+	hlp = (char *)malloc(sizeof(char) * (oth->data->st_rdev));
+	hlp = print_nbr_minor(oth, 0, 0);
+	ft_putstr(", ");
+	ft_putstr(hlp);
 }
 
 char	*print_nbr_major(t_file *file, int a, int i)

@@ -10,37 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <sys/stat.h>
 #include "libft.h"
 #include "ft_ls.h"
 
 void	ft_print_ls(t_dir *tmp, int c, int *tab)
 {
-	t_file	*file;
+	t_file		*file;
+	strucstat	info;
 
 	while (tmp)
 	{
-		if (tmp->printme == 0)
-		{
-			ft_code_erreur(5, tmp->elem);
-			tmp = tmp->next;
-			continue;
-		}
 		if (c >= 2 && (check_param(tmp->elem) == 1))
 		{
 			ft_putstr(tmp->elem);
 			ft_putendl(":");
 		}
 		file = tmp->start;
-		if (tab[1] == 1 && check_param(tmp->elem) == 1)
+		if (tab[1] == 1)
 		{
-			if (tab[2] == 1 && (file == tmp->start))
-			{
-				ft_putstr("total ");
-				ft_putnbr(tmp->total);
-				ft_putchar('\n');
-			}
+			if (tab[2] == 1 && (file == tmp->start) && S_ISDIR(info.st_mode))
+				total_prnt(tmp);
 			ft_ls_r(tmp->start, tmp, tab);
 		}
 		else
@@ -51,16 +40,21 @@ void	ft_print_ls(t_dir *tmp, int c, int *tab)
 	}
 }
 
+void	total_prnt(t_dir *dir)
+{
+	ft_putstr("total ");
+	ft_putnbr(dir->total);
+	ft_putchar('\n');
+}
+
 void	ft_loop_prnt(t_file *file, t_dir *tmp, int *tab)
 {
+	strucstat	info;
+
 	while (file)
 	{
-		if (tab[2] == 1 && (file == tmp->start) && check_param(tmp->elem) == 1)
-		{
-			ft_putstr("total ");
-			ft_putnbr(tmp->total);
-			ft_putchar('\n');
-		}
+		if (tab[2] == 1 && (file == tmp->start) && S_ISDIR(info.st_mode))
+			total_prnt(tmp);
 		if (tab[2] == 1)
 			ft_print_info(file, tmp->elem);
 		else
@@ -87,8 +81,12 @@ void	ft_ls_r(t_file *file, t_dir *dir, int *tab)
 	t_file	*tmp;
 
 	tmp = file;
-	while (tmp->next)
+	while (tmp)
+	{
+		if (!(tmp->next))
+			break ;
 		tmp = tmp->next;
+	}
 	while (tmp)
 	{
 		if (tab[2] == 1)

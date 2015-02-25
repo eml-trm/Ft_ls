@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 #include "ft_ls.h"
 
@@ -73,7 +72,7 @@ void	ft_change_dir(t_dir *dir)
 {
 	int		i;
 	t_dir	*tmp;
-	char	*stk;
+	char	printme;
 
 	while ((i = ft_cmp_dir(dir)) > -1)
 	{
@@ -83,15 +82,13 @@ void	ft_change_dir(t_dir *dir)
 			tmp = tmp->next;
 			i--;
 		}
-		stk = ft_strdup(tmp->elem);
-		tmp->elem = ft_strdup(tmp->next->elem);
-		tmp->next->elem = ft_strdup(stk);
+		printme = '\0';
+		ft_swap_dir(tmp, printme);
 	}
 }
 
 void	ft_sort_arg(t_dir *dir, int *tab)
 {
-	*tab = *tab;
 	if (tab[1] == 1)
 	{
 		if ((ft_cmp_dir_rev(dir) != (3)))

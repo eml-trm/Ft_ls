@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "ft_ls.h"
 
 void		ft_sort_time_file(t_file *file)
@@ -49,7 +48,7 @@ void		ft_swap(t_file *file)
 	file->next->data = sswap;
 }
 
-void		ft_swap_dir(t_dir *dir)
+void		ft_swap_dir(t_dir *dir, char printme)
 {
 	char	*swap;
 	t_file	*lswap;
@@ -62,30 +61,35 @@ void		ft_swap_dir(t_dir *dir)
 	sswap = dir->info;
 	tswap = dir->mtime;
 	bswap = dir->total;
+	printme = dir->printme;
 	dir->elem = dir->next->elem;
 	dir->start = dir->next->start;
 	dir->info = dir->next->info;
 	dir->mtime = dir->next->mtime;
 	dir->total = dir->next->total;
+	dir->printme = dir->next->printme;
 	dir->next->elem = swap;
 	dir->next->start = lswap;
 	dir->next->info = sswap;
 	dir->next->mtime = tswap;
 	dir->next->total = bswap;
+	dir->next->printme = printme;
 }
 
 void		ft_sort_time_dir(t_dir *dir)
 {
 	t_dir	*tmp;
 	t_dir	*tmp2;
+	char	printme;
 
 	tmp = dir;
+	printme = '\0';
 	while (tmp && tmp->next)
 	{
 		tmp2 = tmp->next;
 		if (tmp->mtime < tmp2->mtime)
 		{
-			ft_swap_dir(tmp);
+			ft_swap_dir(tmp, printme);
 			tmp = dir;
 		}
 		else

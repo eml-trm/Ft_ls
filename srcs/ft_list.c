@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 #include "ft_ls.h"
 
@@ -37,7 +36,7 @@ void	list(t_file **alst, t_file *new, t_file *tmp)
 		tmp = (*alst);
 		while (tmp)
 		{
-			if (tmp->next == NULL)
+			if (!(tmp->next))
 				break ;
 			tmp = tmp->next;
 		}

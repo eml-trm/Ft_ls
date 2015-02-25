@@ -13,15 +13,11 @@
 #ifndef FT_LS_H
 # define FT_LS_H
 
-# include <time.h>
-# include <grp.h>
-# include <pwd.h>
 # include <sys/stat.h>
-# include <sys/types.h>
-# include <sys/dir.h>
 # include <dirent.h>
-# include <string.h>
 # include "libft.h"
+
+typedef struct stat	strucstat;
 
 typedef struct		s_file
 {
@@ -54,9 +50,12 @@ void				ft_add_end(t_dir *dir, char *fullname);
 void				ft_recursive(char *fullname, t_dir *dir);
 char				*print_nbr_minor(t_file *file, int a, int i);
 char				*print_nbr_major(t_file *file, int a, int i);
+char				*init_uid(t_file *oth, char *str);
 void				print_uid(t_file *file, int a, int tmp);
+char				*init_grp(t_file *oth, char *str);
 void				print_grp(t_file *file, int a, int tmp);
-void				print_nbr_sze(t_file *file, int a, int i);
+void				print_nbr_sze(t_file *file, int a, int i, int nbr);
+void				maj_min(t_file *oth, char *new);
 void				print_nbr_link(t_file *file, int a, int i);
 void				ft_print_info(t_file *file, char *dir);
 void				ft_sort_time_dir(t_dir *dir);
@@ -64,12 +63,13 @@ void				ft_sort_time_file(t_file *file);
 void				ft_data_dir(char *dirname, t_dir *new);
 void				ft_data(char *fullname, t_file *file);
 void				ft_swap(t_file *file);
-void				ft_swap_dir(t_dir *dir);
+void				ft_swap_dir(t_dir *dir, char printme);
 void				right_oth(struct stat *data);
 void				right_grp(struct stat *data);
 void				right_usr(struct stat *data);
 void				ft_sort_date(char *str, int res, int next, int oth);
 void				ft_time(t_file *file, int res, int oth);
+void				total_prnt(t_dir *dir);
 size_t				cal_total(t_file *file, char *fullname);
 void				print_right(struct stat *data);
 void				ft_change_dir_rev(t_dir *dir);

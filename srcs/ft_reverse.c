@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 #include "ft_ls.h"
 
@@ -26,7 +25,6 @@ int		ft_cmp_dir_rev(t_dir *dir)
 		if (ft_strcmp(dir->elem, dir->next->elem) < 0)
 			return (i);
 		dir = dir->next;
-		i++;
 	}
 	return (3);
 }
@@ -35,22 +33,18 @@ void	ft_change_dir_rev(t_dir *dir)
 {
 	int		i;
 	t_dir	*tmp;
-	char	*stk;
+	char	printme;
 
 	i = 0;
-	printf("icicicicicici\n");
+	printme = '\0';
 	while ((i = ft_cmp_dir(dir)) < 0)
 	{
-		printf("LALALALA\n");               //      ----------> A modifier ne fonctuonne pas
-		printf("i == %d\n", i);
 		tmp = dir;
 		while (i > 0)
 		{
 			tmp = tmp->next;
 			i--;
 		}
-		stk = tmp->elem;
-		tmp->elem = tmp->next->elem;
-		tmp->next->elem = ft_strdup(stk);
+		ft_swap_dir(tmp, printme);
 	}
 }

@@ -18,7 +18,7 @@ HEADER = includes/
 
 DIRSRC = srcs/
 
-FLAGS = -Wall -Wextra -Werror -g -ggdb
+FLAGS = -Wall -Wextra -Werror
 
 SRC = main.c \
 	  ft_ls.c \
@@ -43,10 +43,10 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -s -C $(LIB)
-	@gcc $(FLAGS) -o $(NAME) $^ -L$(LIB) -lft -g -ggdb
+	@gcc $(FLAGS) -o $(NAME) $^ -L$(LIB) -lft
 
 %.o: $(DIRSRC)%.c
-	@gcc $(FLAGS) -o $@ -c $< -I$(LIB)$(HEADER) -I$(HEADER) -g -ggdb
+	@gcc $(FLAGS) -o $@ -c $< -I$(LIB)$(HEADER) -I$(HEADER)
 
 clean:
 	@rm -f $(OBJ)

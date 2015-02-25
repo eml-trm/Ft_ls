@@ -10,37 +10,35 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <time.h>
-#include <grp.h>
-#include <pwd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <uuid/uuid.h>
 #include "ft_ls.h"
 
 void				ft_sort_date(char *str, int res, int next, int oth)
 {
+	int				a;
 	int				i;
 
 	i = 8;
-	while (i < 11)
+	a = 11;
+	while (i < a)
 		write(1, &str[i++], 1);
 	i = 4;
-	while (i < 8)
+	a = 8;
+	while (i < a)
 		write(1, &str[i++], 1);
 	if (res < 15778463 && next < oth)
 	{
 		i = 11;
-		while (i < 16)
+		a = 16;
+		while (i < a)
 			write(1, &str[i++], 1);
 	}
 	else
 	{
 		i = 20;
-		while (i < 25)
+		a = 25;
+		while (i < a)
 			write(1, &str[i++], 1);
-		ft_putchar(' ');
 	}
 }
 
@@ -69,7 +67,8 @@ void				ft_data(char *fullname, t_file *new)
 
 	if (!(ret = (struct stat *)malloc(sizeof(struct stat))))
 		ft_code_erreur(3, NULL);
-	lstat(fullname, ret);
+	if (lstat(fullname, ret) == -1)
+		ft_code_erreur(4, NULL);
 	new->data = ret;
 	new->time_sec = new->data->st_mtime;
 }
@@ -80,7 +79,8 @@ void				ft_data_dir(char *dirname, t_dir *new)
 
 	if (!(ret = (struct stat *)malloc(sizeof(struct stat))))
 		ft_code_erreur(3, NULL);
-	lstat(dirname, ret);
+	if (lstat(dirname, ret) == -1)
+		ft_code_erreur(4, NULL);
 	new->info = ret;
 	new->mtime = new->info->st_mtime;
 }
