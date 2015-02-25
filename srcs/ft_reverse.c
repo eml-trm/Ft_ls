@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "libft.h"
 #include "ft_ls.h"
 
@@ -37,8 +38,11 @@ void	ft_change_dir_rev(t_dir *dir)
 	char	*stk;
 
 	i = 0;
+	printf("icicicicicici\n");
 	while ((i = ft_cmp_dir(dir)) < 0)
 	{
+		printf("LALALALA\n");               //      ----------> A modifier ne fonctuonne pas
+		printf("i == %d\n", i);
 		tmp = dir;
 		while (i > 0)
 		{
