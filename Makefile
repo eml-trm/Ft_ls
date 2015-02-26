@@ -33,7 +33,8 @@ SRC = main.c \
 	  ft_prt_right.c \
 	  ft_opt_t.c \
 	  ft_get_info.c \
-	  ft_recursive.c
+	  ft_recursive.c \
+	  ft_colors.c
 
 OBJ = $(SRC:.c=.o)
 

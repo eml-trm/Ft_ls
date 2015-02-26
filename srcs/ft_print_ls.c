@@ -16,7 +16,7 @@
 void	ft_print_ls(t_dir *tmp, int c, int *tab)
 {
 	t_file		*file;
-	strucstat	info;
+	t_strucstat	info;
 
 	while (tmp)
 	{
@@ -49,7 +49,7 @@ void	total_prnt(t_dir *dir)
 
 void	ft_loop_prnt(t_file *file, t_dir *tmp, int *tab)
 {
-	strucstat	info;
+	t_strucstat	info;
 
 	while (file)
 	{
@@ -58,7 +58,16 @@ void	ft_loop_prnt(t_file *file, t_dir *tmp, int *tab)
 		if (tab[2] == 1)
 			ft_print_info(file, tmp->elem);
 		else
-			ft_putendl(file->content);
+		{
+			if (check_param(file->content) == 1)
+				print_cyan(file->content);
+			else if (check_param(file->content) == 2)
+				print_magenta(file->content);
+			else if (check_param(file->content) == 4)
+				print_red(file->content);
+			else
+				ft_putendl(file->content);
+		}
 		file = file->next;
 	}
 }

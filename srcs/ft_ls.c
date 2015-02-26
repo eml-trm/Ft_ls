@@ -15,14 +15,12 @@
 
 void	ft_ls(t_dir *param, char *str, int *tab)
 {
-	t_file *file;
-
 	if (check_param(str) == 1)
 		read_dir(param, str, tab);
 	else if (check_param(str) == 3)
 		param->printme = 0;
 	else
-		ft_add_list(&file, param->elem, param->elem, tab);
+		ft_add_list(&param->start, param->elem, param->elem, tab);
 }
 
 t_file	*init(void)

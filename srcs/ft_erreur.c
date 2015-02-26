@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "libft.h"
 #include "ft_ls.h"
 
@@ -43,9 +44,14 @@ int		check_param(char *str)
 {
 	struct stat	info;
 
-	if (stat(str, &info) == -1)
+	if (lstat(str, &info) == -1)
 		return (3);
 	if (S_ISDIR(info.st_mode))
 		return (1);
+	if (S_ISLNK(info.st_mode))
+		return (2);
+	if (info.st_mode & S_IXUSR && info.st_mode & S_IXGRP
+	&& info.st_mode & S_IXOTH)
+		return (4);
 	return (0);
 }

@@ -17,7 +17,12 @@
 # include <dirent.h>
 # include "libft.h"
 
-typedef struct stat	strucstat;
+# define MAGENTA "\033[35m"
+# define RED "\033[31m"
+# define CYAN "\033[36m"
+# define RESET "\033[0m"
+
+typedef struct stat	t_strucstat;
 
 typedef struct		s_file
 {
@@ -40,6 +45,9 @@ typedef struct		s_dir
 	char			printme;
 }					t_dir;
 
+void				print_cyan(char *str);
+void				print_magenta(char *str);
+void				print_red(char *str);
 void				read_dir(t_dir *param, char *str, int *tab);
 int					check_param(char *str);
 t_file				*init(void);

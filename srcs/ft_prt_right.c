@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void			right_usr(strucstat *data)
+void			right_usr(t_strucstat *data)
 {
 	ft_putstr((data->st_mode & S_IRUSR) ? "r" : "-");
 	ft_putstr((data->st_mode & S_IWUSR) ? "w" : "-");
@@ -26,7 +26,7 @@ void			right_usr(strucstat *data)
 		ft_putstr("-");
 }
 
-void			right_grp(strucstat *data)
+void			right_grp(t_strucstat *data)
 {
 	ft_putstr((data->st_mode & S_IRGRP) ? "r" : "-");
 	ft_putstr((data->st_mode & S_IWGRP) ? "w" : "-");
@@ -40,7 +40,7 @@ void			right_grp(strucstat *data)
 		ft_putstr("-");
 }
 
-void			right_oth(strucstat *data)
+void			right_oth(t_strucstat *data)
 {
 	ft_putstr((data->st_mode & S_IROTH) ? "r" : "-");
 	ft_putstr((data->st_mode & S_IWOTH) ? "w" : "-");
@@ -55,7 +55,7 @@ void			right_oth(strucstat *data)
 		ft_putstr("-");
 }
 
-void			print_right(strucstat *data)
+void			print_right(t_strucstat *data)
 {
 	if (S_ISDIR(data->st_mode))
 		ft_putstr("d");
