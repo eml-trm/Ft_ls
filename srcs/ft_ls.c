@@ -81,7 +81,7 @@ void	ft_print_info(t_file *file, char *dir)
 	ft_putstr("  ");
 	print_nbr_sze(file, 0, 0, 0);
 	ft_time(file, 0, 0);
-	ft_putstr(file->content);
+	ft_print_in_color_l(file->content);
 	if (S_ISLNK(file->data->st_mode))
 	{
 		join = ft_strcjoin(dir, file->content, '/');

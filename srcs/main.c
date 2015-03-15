@@ -55,7 +55,7 @@ int		main(int ac, char **av)
 	t_dir	*dir;
 	int		c;
 
-	ac = ac;
+	(void)ac;
 	init_zero(tab);
 	dir = NULL;
 	i = 0;
