@@ -18,7 +18,7 @@ void	ft_ls(t_dir *param, char *str, int *tab)
 	if (check_param(str) == 1)
 		read_dir(param, str, tab);
 	else if (check_param(str) == 3)
-		param->printme = 0;
+		check_exist(str, param);
 	else
 		ft_add_list(&param->start, param->elem, param->elem, tab);
 }

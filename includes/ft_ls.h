@@ -45,7 +45,7 @@ typedef struct		s_dir
 	char			printme;
 }					t_dir;
 
-
+void				check_exist(char *str, t_dir *dir);
 void				ft_print_in_color_l(char *str);
 void				ft_print_in_color(char *str);
 void				print_cyan(char *str);

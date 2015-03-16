@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 #include "ft_ls.h"
 
@@ -29,10 +28,9 @@ void	ft_code_erreur(int code, char *str)
 	}
 	else
 	{
-		ft_putstr_fd("ERROR: ", 2);
 		ft_putstr(str);
 		if (code == 1)
-			ft_putstr_fd("  Permission denied \n", 2);
+			ft_putstr_fd(" ls: Permission denied \n", 2);
 		else if (code == 5)
 			ft_putstr_fd(" : No such file or directory ", 2);
 		else if (code == 7)
@@ -54,4 +52,22 @@ int		check_param(char *str)
 	&& info.st_mode & S_IXOTH)
 		return (4);
 	return (0);
+}
+
+void	check_exist(char *str, t_dir *tmp)
+{
+	DIR				*dir;
+	struct dirent	*ret;
+
+	if (!(dir = opendir(".")))
+		ft_code_erreur(1, str);
+	while ((ret = readdir(dir)))
+	{
+		if (ft_strcmp(tmp->elem, ret->d_name) == 0)
+			tmp->printme = 0;
+		else
+			tmp->printme = 5;
+	}
+	if (tmp->printme == 5)
+		ft_code_erreur(5, str);
 }
