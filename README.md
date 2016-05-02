@@ -1,40 +1,41 @@
 # Ft_ls
-#### Recoder la commande ls.
-Ce projet consiste à recoder la commande ls du système.
-Son comportement doit être identique à celui de la commands ls originale du
-système, avec les options suivantes : -l, -R, -a, -r et -t.
+#### Recode the ls command.
+
+This project will recode the system ls command.
+His behavior should be identical to the original ls commands of
+system , with the following options : -l , -R , -a, -r and -t .
 
 
 ## Summary
  1. [Makefile](#makefile)
- 2. [Utilisation](#usage)
- 3. [Exemple](#exemple)
+ 2. [Usage](#usage)
+ 3. [Example](#exemple)
 
 ## <a name="makefile">Makefile</a>
 
 | Commande       	|  Actions 	|
 |----------------	|----------	|
-| `make`      	  | Compile tous les .c et créer un exécutable fdf  	|
-| `make clean`    | Supprime les .o.  	|
-| `make flcean`  	| Supprime les .o et fdf.  	|
-| `make re` 	 	| Exécute fclean et make.  	|
+| `make`      	  | Compile all .c and create an executable "fdf"  	|
+| `make clean`    | Delete all .o.  	|
+| `make flcean`  	| Delete all .o and executable 'fdf'.  	|
+| `make re` 	 	| Execute fclean and make.  	|
 
-## <a name="usage">Utilisation</a>
+## <a name="usage">Usage</a>
 
-* Sans option, sans argument:
+* Without options, without arguments:
 >./ft_ls
 
-* Sans option, avec arguments:
+* Without options, with arguments:
 >./ft_ls file1 file2 
 >>./ft_ls dir1 file1
 
-* Avec options, sans argument:
+* With options, without arguments:
 >./ft_ls -laRtr
 
-* Avec options, avec arguments:
+* With options, with arguments:
 >./ft_ls -laRtr dir1 file2 etc
 
-## <a name="exemple">Exemple</a>
+## <a name="exemple">Example</a>
 
 ```c
 ./ft_ls
